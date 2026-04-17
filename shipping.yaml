@@ -46,53 +46,52 @@
     args:
       chdir: /app
 
-  - name: rename jar file
-    ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
-    args:
-      chdir: /app
+  # - name: rename jar file
+  #   ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+  #   args:
+  #     chdir: /app
 
-  - name: copy shipping service
-    ansible.builtin.copy:
-      src: shipping.service
-      dest: /etc/systemd/system/shipping.service
+  # - name: copy shipping service
+  #   ansible.builtin.copy:
+  #     src: shipping.service
+  #     dest: /etc/systemd/system/shipping.service
 
-  - name: daemon reload
-    ansible.builtin.systemd_service:
-      daemon_reload: true
+  # - name: daemon reload
+  #   ansible.builtin.systemd_service:
+  #     daemon_reload: true
 
-  - name: enable and start shipping
-    ansible.builtin.service:
-      name: shipping
-      state: started
-      enabled: yes
+  # - name: enable and start shipping
+  #   ansible.builtin.service:
+  #     name: shipping
+  #     state: started
+  #     enabled: yes
 
-  # - name: verify mysql connection using app user
-  #   community.mysql.mysql_query:
-  #     login_user: shipping
+  # # - name: verify mysql connection using app user
+  # #   community.mysql.mysql_query:
+  # #     login_user: shipping
+  # #     login_password: RoboShop@1
+  # #     login_host: mysql.bharath2103.site
+  # #     login_db: cities
+  # #     query: "SELECT 1;"
+
+  # - name: import data
+  #   tags:
+  #   - import
+  #   community.mysql.mysql_db:
+  #     name: all
+  #     login_user: root
   #     login_password: RoboShop@1
   #     login_host: mysql.bharath2103.site
-  #     login_db: cities
-  #     query: "SELECT 1;"
+  #     state: import
+  #     target: "{{ item }}"
+  #   loop:
+  #   - /app/db/schema.sql
+  #   - /app/db/app-user.sql
+  #   - /app/db/master-data.sql
 
-  - name: import data
-    tags:
-    - import
-    community.mysql.mysql_db:
-      name: all
-      login_user: root
-      login_password: RoboShop@1
-      login_host: mysql.bharath2103.site
-      state: import
-      target: "{{ item }}"
-    loop:
-    - /app/db/schema.sql
-    - /app/db/app-user.sql
-    - /app/db/master-data.sql
-
-  - name: restart shipping
-    tags:
-    - import
-    ansible.builtin.service:
-      state: restarted
-      name: shipping
-      
+  # - name: restart shipping
+  #   tags:
+  #   - import
+  #   ansible.builtin.service:
+  #     state: restarted
+  #     name: shipping
