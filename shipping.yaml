@@ -70,7 +70,7 @@
   #   community.mysql.mysql_query:
   #     login_user: shipping
   #     login_password: RoboShop@1
-  #     login_host: mysql.bharath2103.site
+  #     login_host: mysql.bharath2103.online
   #     login_db: cities
   #     query: "SELECT 1;"
 
@@ -81,7 +81,7 @@
       name: all
       login_user: root
       login_password: RoboShop@1
-      login_host: mysql.bharath2103.site
+      login_host: mysql.bharath2103.online
       state: import
       target: "{{ item }}"
     loop:
